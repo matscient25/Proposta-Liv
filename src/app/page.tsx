@@ -2,15 +2,19 @@
 
 import { useState } from "react";
 import Login from "@/components/Login";
-import { Eye, FileText, Lightbulb, Rocket, Calendar, DollarSign } from "lucide-react";
+import { Eye, FileText, Lightbulb, Rocket, Calendar, DollarSign, Target, Shield, Sparkles, HelpCircle } from "lucide-react";
 import VisaoGeral from "@/components/sections/VisaoGeral";
 import Contexto from "@/components/sections/Contexto";
 import Solucao from "@/components/sections/Solucao";
 import Epicos from "@/components/sections/Epicos";
 import Roadmap from "@/components/sections/Roadmap";
+import Metricas from "@/components/sections/Metricas";
+import Riscos from "@/components/sections/Riscos";
+import CasosDeUso from "@/components/sections/CasosDeUso";
 import Investimento from "@/components/sections/Investimento";
+import FAQs from "@/components/sections/FAQs";
 
-type Tab = "visao-geral" | "contexto" | "solucao" | "epicos" | "roadmap" | "investimento";
+type Tab = "visao-geral" | "contexto" | "solucao" | "epicos" | "roadmap" | "metricas" | "riscos" | "casos-de-uso" | "investimento" | "faqs";
 
 export default function Home() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -32,7 +36,11 @@ export default function Home() {
     { id: "solucao" as Tab, label: "Solução", icon: Lightbulb },
     { id: "epicos" as Tab, label: "Épicos", icon: Rocket },
     { id: "roadmap" as Tab, label: "Roadmap", icon: Calendar },
+    { id: "metricas" as Tab, label: "Métricas", icon: Target },
+    { id: "riscos" as Tab, label: "Riscos", icon: Shield },
+    { id: "casos-de-uso" as Tab, label: "Casos de Uso", icon: Sparkles },
     { id: "investimento" as Tab, label: "Investimento", icon: DollarSign },
+    { id: "faqs" as Tab, label: "FAQs", icon: HelpCircle },
   ];
 
   return (
@@ -93,7 +101,11 @@ export default function Home() {
           {activeTab === "solucao" && <Solucao />}
           {activeTab === "epicos" && <Epicos />}
           {activeTab === "roadmap" && <Roadmap />}
+          {activeTab === "metricas" && <Metricas />}
+          {activeTab === "riscos" && <Riscos />}
+          {activeTab === "casos-de-uso" && <CasosDeUso />}
           {activeTab === "investimento" && <Investimento />}
+          {activeTab === "faqs" && <FAQs />}
         </div>
 
         {/* Footer */}
