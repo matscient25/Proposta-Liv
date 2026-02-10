@@ -178,7 +178,7 @@ export default function CasosDeUso() {
                   <h4 className="text-lg font-semibold text-purple-900 mb-2">
                     📌 {caso.titulo}
                   </h4>
-                  <p className="text-slate-700 italic">"{caso.cenario}"</p>
+                  <p className="text-slate-700 italic">&ldquo;{caso.cenario}&rdquo;</p>
                 </div>
 
                 <div className="mb-4">

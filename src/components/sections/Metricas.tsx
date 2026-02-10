@@ -217,7 +217,7 @@ export default function Metricas() {
 
       {/* Definição de Done */}
       <Card className="p-6 bg-green-50 border-green-300">
-        <h3 className="text-lg font-semibold text-green-900 mb-3">✅ Definição de "Projeto Concluído"</h3>
+        <h3 className="text-lg font-semibold text-green-900 mb-3">✅ Definição de &ldquo;Projeto Concluído&rdquo;</h3>
         <p className="text-slate-700 mb-4">
           O projeto será considerado concluído quando <strong>TODOS</strong> os seguintes critérios forem atendidos:
         </p>
