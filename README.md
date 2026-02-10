@@ -41,7 +41,48 @@ proposta-liv/
 └── next.config.ts
 ```
 
-## Como Executar
+## 🌐 Deploy Online (Como no Lovable!)
+
+### Opção 1: Deploy no Vercel (Recomendado - Grátis)
+
+O jeito mais rápido de colocar no ar:
+
+1. Acesse [vercel.com](https://vercel.com) e faça login com GitHub
+2. Clique em **"Add New Project"**
+3. Importe este repositório: `matscient25/Proposta-Liv`
+4. Selecione o branch: `claude/form-validation-component-U3bdQ`
+5. Clique em **"Deploy"**
+6. ✅ Em 2 minutos você terá uma URL pública tipo: `proposta-liv.vercel.app`
+
+**Ou via CLI:**
+```bash
+# Instalar Vercel CLI
+npm i -g vercel
+
+# Deploy (primeira vez)
+vercel
+
+# Deploy em produção
+vercel --prod
+```
+
+### Opção 2: Deploy no Netlify
+
+1. Acesse [netlify.com](https://netlify.com)
+2. Clique em **"Add new site"** → **"Import an existing project"**
+3. Conecte seu GitHub e selecione este repositório
+4. Configure:
+   - Build command: `npm run build`
+   - Publish directory: `.next`
+5. Deploy!
+
+### Opção 3: Outras plataformas
+
+- **Railway**: [railway.app](https://railway.app)
+- **Render**: [render.com](https://render.com)
+- **DigitalOcean App Platform**: [digitalocean.com](https://www.digitalocean.com/products/app-platform)
+
+## 💻 Como Executar Localmente
 
 ### Pré-requisitos
 
