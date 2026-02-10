@@ -92,83 +92,47 @@ export default function Roadmap() {
 
       {/* Gantt Chart Melhorado */}
       <Card className="p-6 overflow-x-auto shadow-xl">
-        <div className="mb-6 flex items-center justify-between">
-          <div className="flex items-center gap-2 text-sm text-slate-600">
-            <Milestone className="w-5 h-5 text-purple-600" />
-            <span className="font-semibold">6 meses | 12 sprints quinzenais | 5 épicos | 4 marcos críticos</span>
-          </div>
-          <div className="flex items-center gap-3">
-            <Flag className="w-4 h-4 text-orange-600" />
-            <span className="text-sm text-slate-600">Marcos importantes</span>
-          </div>
+        <div className="mb-6 flex items-center gap-2 text-sm text-slate-600">
+          <Milestone className="w-5 h-5 text-purple-600" />
+          <span className="font-semibold">6 meses | 12 sprints quinzenais | 5 épicos</span>
         </div>
 
-        <div className="min-w-[900px]">
-          {/* Header com meses e marcos */}
-          <div className="flex mb-6">
-            <div className="w-72 flex-shrink-0"></div>
-            <div className="flex-1 flex relative">
+        <div className="min-w-[800px]">
+          {/* Header com meses */}
+          <div className="flex mb-4">
+            <div className="w-64 md:w-72 flex-shrink-0"></div>
+            <div className="flex-1 flex">
               {meses.map((mes, index) => (
-                <div key={index} className="flex-1 text-center relative">
-                  <div className="font-bold text-lg text-purple-900 mb-1">{mes}</div>
+                <div key={index} className="flex-1 text-center">
+                  <div className="font-bold text-base md:text-lg text-purple-900 mb-1">{mes}</div>
                   <div className="text-xs text-slate-600 font-medium">2026</div>
-
-                  {/* Marcos no header */}
-                  {marcos.filter(m => m.mes === index).map((marco, mIdx) => (
-                    <div
-                      key={mIdx}
-                      className="absolute -bottom-8 left-1/2 -translate-x-1/2 z-10"
-                    >
-                      <div className="bg-gradient-to-br from-orange-500 to-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center shadow-lg text-sm border-2 border-white">
-                        <Flag className="w-4 h-4" />
-                      </div>
-                      <div className="text-xs font-semibold text-orange-700 mt-1 whitespace-nowrap">
-                        {marco.label}
-                      </div>
-                    </div>
-                  ))}
                 </div>
-              ))}
-
-              {/* Linha vertical para marcos */}
-              {marcos.map((marco, idx) => (
-                <div
-                  key={idx}
-                  className="absolute top-0 bottom-0 border-l-2 border-dashed border-orange-400 opacity-30"
-                  style={{ left: `${(marco.mes + 0.5) * (100 / meses.length)}%` }}
-                />
               ))}
             </div>
           </div>
 
-          {/* Espaço para os marcos */}
-          <div className="h-12 mb-4"></div>
-
           {/* Épicos */}
-          <div className="space-y-4">
+          <div className="space-y-3">
             {epicos.map((epico, epicoIndex) => (
-              <div key={epicoIndex} className="flex items-center group hover:scale-[1.02] transition-transform">
+              <div key={epicoIndex} className="flex items-center">
                 {/* Info do épico */}
-                <div className="w-72 flex-shrink-0 pr-4">
-                  <div className="bg-white rounded-lg p-3 shadow-md border-2 border-purple-200 group-hover:border-purple-400 transition-colors">
-                    <div className="flex items-center gap-3 mb-2">
-                      <div className={`w-8 h-8 rounded-lg bg-gradient-to-br ${epico.gradiente} flex items-center justify-center text-white font-bold text-sm flex-shrink-0`}>
+                <div className="w-64 md:w-72 flex-shrink-0 pr-3 md:pr-4">
+                  <div className="bg-white rounded-lg p-2 md:p-3 shadow-md border-2 border-purple-200">
+                    <div className="flex items-center gap-2 mb-1.5">
+                      <div className={`w-7 h-7 rounded-lg bg-gradient-to-br ${epico.gradiente} flex items-center justify-center text-white font-bold text-xs flex-shrink-0`}>
                         {epico.numero}
                       </div>
-                      <div className="flex-1">
-                        <div className="text-sm font-bold text-purple-900">
-                          Épico {epico.numero}
-                        </div>
-                        <div className="text-xs text-slate-600 font-medium">
+                      <div className="flex-1 min-w-0">
+                        <div className="text-xs font-bold text-purple-900 truncate">
                           {epico.nome}
                         </div>
                       </div>
                     </div>
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <span className={`text-xs px-2 py-1 rounded-full border font-semibold ${getPriorityBadge(epico.prioridade)}`}>
+                    <div className="flex items-center gap-1.5 flex-wrap text-xs">
+                      <span className={`px-1.5 py-0.5 rounded-full border font-semibold ${getPriorityBadge(epico.prioridade)}`}>
                         {epico.prioridade}
                       </span>
-                      <span className="text-xs text-slate-500 font-medium">{epico.sprint}</span>
+                      <span className="text-slate-500 font-medium">{epico.sprint}</span>
                     </div>
                   </div>
                 </div>
@@ -261,22 +225,23 @@ export default function Roadmap() {
           </ul>
         </Card>
 
-        <Card className="p-6 bg-gradient-to-br from-orange-50 to-yellow-50 border-orange-300 shadow-lg">
-          <h3 className="text-lg font-semibold text-orange-900 mb-3 flex items-center gap-2">
-            <Flag className="w-5 h-5" />
+        <Card className="p-6 bg-gradient-to-br from-blue-50 to-indigo-50 border-blue-300 shadow-lg">
+          <h3 className="text-lg font-semibold text-blue-900 mb-3">
             Marcos Críticos
           </h3>
-          <ul className="space-y-2 text-sm text-slate-700">
+          <div className="grid grid-cols-2 gap-3 text-sm text-slate-700">
             {marcos.map((marco, idx) => (
-              <li key={idx} className="flex items-start gap-2">
-                <Flag className="w-4 h-4 text-orange-600 mt-0.5 flex-shrink-0" />
-                <div>
-                  <span className="font-bold text-purple-900">{meses[marco.mes]}:</span>
-                  <span className="ml-1">{marco.label}</span>
+              <div key={idx} className="flex items-center gap-2 bg-white rounded-lg p-2 border border-blue-200">
+                <div className="w-8 h-8 rounded bg-blue-600 flex items-center justify-center flex-shrink-0">
+                  <span className="text-white font-bold text-xs">{marco.mes + 1}</span>
                 </div>
-              </li>
+                <div className="flex-1 min-w-0">
+                  <div className="font-bold text-blue-900 text-xs">{meses[marco.mes]}</div>
+                  <div className="text-xs text-slate-600 truncate">{marco.label}</div>
+                </div>
+              </div>
             ))}
-          </ul>
+          </div>
         </Card>
       </div>
 
