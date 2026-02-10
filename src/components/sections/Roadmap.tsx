@@ -13,8 +13,7 @@ export default function Roadmap() {
       inicio: 0,
       fim: 0,
       prioridade: "Crítica",
-      sprint: "Sprint 0",
-      icon: "🔍"
+      sprint: "Sprint 0"
     },
     {
       numero: 2,
@@ -23,8 +22,7 @@ export default function Roadmap() {
       inicio: 1,
       fim: 2,
       prioridade: "Crítica",
-      sprint: "Sprints 1-3",
-      icon: "🚀"
+      sprint: "Sprints 1-3"
     },
     {
       numero: 3,
@@ -33,8 +31,7 @@ export default function Roadmap() {
       inicio: 2,
       fim: 3,
       prioridade: "Alta",
-      sprint: "Sprints 3-4",
-      icon: "🎯"
+      sprint: "Sprints 3-4"
     },
     {
       numero: 4,
@@ -43,8 +40,7 @@ export default function Roadmap() {
       inicio: 1,
       fim: 4,
       prioridade: "Média-Alta",
-      sprint: "Sprints 1-5",
-      icon: "✨"
+      sprint: "Sprints 1-5"
     },
     {
       numero: 5,
@@ -53,17 +49,16 @@ export default function Roadmap() {
       inicio: 1,
       fim: 5,
       prioridade: "Crítica",
-      sprint: "Sprints 1-6",
-      icon: "🎓"
+      sprint: "Sprints 1-6"
     }
   ];
 
   // Marcos importantes
   const marcos = [
-    { mes: 0, label: "Kick-off", icon: "🎬" },
-    { mes: 2, label: "BETT DiaLab", icon: "🏆" },
-    { mes: 2, label: "LIV no HubSpot", icon: "✅" },
-    { mes: 5, label: "Go-Live Final", icon: "🎉" }
+    { mes: 0, label: "Kick-off" },
+    { mes: 2, label: "BETT DiaLab" },
+    { mes: 2, label: "LIV no HubSpot" },
+    { mes: 5, label: "Go-Live Final" }
   ];
 
   const getPriorityBadge = (prioridade: string) => {
@@ -125,7 +120,7 @@ export default function Roadmap() {
                       className="absolute -bottom-8 left-1/2 -translate-x-1/2 z-10"
                     >
                       <div className="bg-gradient-to-br from-orange-500 to-red-500 text-white rounded-full w-8 h-8 flex items-center justify-center shadow-lg text-sm border-2 border-white">
-                        {marco.icon}
+                        <Flag className="w-4 h-4" />
                       </div>
                       <div className="text-xs font-semibold text-orange-700 mt-1 whitespace-nowrap">
                         {marco.label}
@@ -156,8 +151,10 @@ export default function Roadmap() {
                 {/* Info do épico */}
                 <div className="w-72 flex-shrink-0 pr-4">
                   <div className="bg-white rounded-lg p-3 shadow-md border-2 border-purple-200 group-hover:border-purple-400 transition-colors">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="text-2xl">{epico.icon}</span>
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className={`w-8 h-8 rounded-lg bg-gradient-to-br ${epico.gradiente} flex items-center justify-center text-white font-bold text-sm flex-shrink-0`}>
+                        {epico.numero}
+                      </div>
                       <div className="flex-1">
                         <div className="text-sm font-bold text-purple-900">
                           Épico {epico.numero}
@@ -225,8 +222,8 @@ export default function Roadmap() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
           {epicos.map((epico) => (
             <div key={epico.numero} className="flex items-center gap-3">
-              <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${epico.gradiente} flex items-center justify-center text-xl shadow-md`}>
-                {epico.icon}
+              <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${epico.gradiente} flex items-center justify-center text-white font-bold text-lg shadow-md`}>
+                {epico.numero}
               </div>
               <div className="flex-1">
                 <div className="text-xs font-bold text-slate-900">Épico {epico.numero}</div>
@@ -272,7 +269,7 @@ export default function Roadmap() {
           <ul className="space-y-2 text-sm text-slate-700">
             {marcos.map((marco, idx) => (
               <li key={idx} className="flex items-start gap-2">
-                <span className="text-xl">{marco.icon}</span>
+                <Flag className="w-4 h-4 text-orange-600 mt-0.5 flex-shrink-0" />
                 <div>
                   <span className="font-bold text-purple-900">{meses[marco.mes]}:</span>
                   <span className="ml-1">{marco.label}</span>

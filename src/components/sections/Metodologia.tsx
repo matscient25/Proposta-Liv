@@ -49,19 +49,19 @@ export default function Metodologia() {
               </h5>
               <div className="space-y-2 text-sm">
                 <div className="flex items-start gap-2">
-                  <span className="text-blue-600 mt-1">🔍</span>
+                  <span className="text-blue-600 mt-1 font-bold">→</span>
                   <span><strong>Research:</strong> Entender necessidades e contexto</span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <span className="text-blue-600 mt-1">💡</span>
+                  <span className="text-blue-600 mt-1 font-bold">→</span>
                   <span><strong>Ideação:</strong> Gerar e avaliar soluções</span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <span className="text-blue-600 mt-1">✅</span>
+                  <span className="text-blue-600 mt-1 font-bold">→</span>
                   <span><strong>Validação:</strong> Testar hipóteses com usuários</span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <span className="text-blue-600 mt-1">📋</span>
+                  <span className="text-blue-600 mt-1 font-bold">→</span>
                   <span><strong>Priorização:</strong> Definir o que entregar</span>
                 </div>
               </div>
@@ -95,19 +95,19 @@ export default function Metodologia() {
               </h5>
               <div className="space-y-2 text-sm">
                 <div className="flex items-start gap-2">
-                  <span className="text-purple-600 mt-1">⚙️</span>
+                  <span className="text-purple-600 mt-1 font-bold">→</span>
                   <span><strong>Desenvolvimento:</strong> Construir features validadas</span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <span className="text-purple-600 mt-1">🧪</span>
+                  <span className="text-purple-600 mt-1 font-bold">→</span>
                   <span><strong>Testes:</strong> Garantir qualidade e funcionamento</span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <span className="text-purple-600 mt-1">🚀</span>
+                  <span className="text-purple-600 mt-1 font-bold">→</span>
                   <span><strong>Deploy:</strong> Entregar valor incremental</span>
                 </div>
                 <div className="flex items-start gap-2">
-                  <span className="text-purple-600 mt-1">📊</span>
+                  <span className="text-purple-600 mt-1 font-bold">→</span>
                   <span><strong>Medição:</strong> Monitorar impacto e resultados</span>
                 </div>
               </div>
@@ -145,7 +145,9 @@ export default function Metodologia() {
 
         <div className="grid md:grid-cols-3 gap-4">
           <div className="p-4 bg-gradient-to-br from-green-50 to-green-100 border-2 border-green-300 rounded-xl">
-            <div className="text-2xl mb-2">🎯</div>
+            <div className="w-10 h-10 mb-3 bg-green-600 rounded-lg flex items-center justify-center">
+              <Target className="w-6 h-6 text-white" />
+            </div>
             <h4 className="font-bold text-green-900 mb-2">Reduz Desperdício</h4>
             <p className="text-sm text-green-800">
               Validamos antes de construir, evitando retrabalho e features desnecessárias
@@ -153,7 +155,9 @@ export default function Metodologia() {
           </div>
 
           <div className="p-4 bg-gradient-to-br from-blue-50 to-blue-100 border-2 border-blue-300 rounded-xl">
-            <div className="text-2xl mb-2">⚡</div>
+            <div className="w-10 h-10 mb-3 bg-blue-600 rounded-lg flex items-center justify-center">
+              <Zap className="w-6 h-6 text-white" />
+            </div>
             <h4 className="font-bold text-blue-900 mb-2">Acelera Time-to-Market</h4>
             <p className="text-sm text-blue-800">
               Descoberta e entrega em paralelo significa entregas mais rápidas e contínuas
@@ -161,7 +165,9 @@ export default function Metodologia() {
           </div>
 
           <div className="p-4 bg-gradient-to-br from-purple-50 to-purple-100 border-2 border-purple-300 rounded-xl">
-            <div className="text-2xl mb-2">🎓</div>
+            <div className="w-10 h-10 mb-3 bg-purple-600 rounded-lg flex items-center justify-center">
+              <RefreshCcw className="w-6 h-6 text-white" />
+            </div>
             <h4 className="font-bold text-purple-900 mb-2">Aprendizado Contínuo</h4>
             <p className="text-sm text-purple-800">
               Feedback constante permite ajustes rápidos e melhoria incremental

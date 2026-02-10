@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import LandingCover from "@/components/LandingCover";
 import Login from "@/components/Login";
-import { Eye, FileText, Lightbulb, Rocket, Calendar, DollarSign, Target, Shield, Sparkles, HelpCircle, RefreshCcw, GitBranch } from "lucide-react";
+import { Eye, FileText, Lightbulb, Rocket, Calendar, DollarSign, Sparkles, HelpCircle, RefreshCcw, GitBranch } from "lucide-react";
 import VisaoGeral from "@/components/sections/VisaoGeral";
 import GTMFlywheel from "@/components/sections/GTMFlywheel";
 import Metodologia from "@/components/sections/Metodologia";
@@ -11,13 +11,11 @@ import Contexto from "@/components/sections/Contexto";
 import Solucao from "@/components/sections/Solucao";
 import Epicos from "@/components/sections/Epicos";
 import Roadmap from "@/components/sections/Roadmap";
-import Metricas from "@/components/sections/Metricas";
-import Riscos from "@/components/sections/Riscos";
 import CasosDeUso from "@/components/sections/CasosDeUso";
 import Investimento from "@/components/sections/Investimento";
 import FAQs from "@/components/sections/FAQs";
 
-type Tab = "visao-geral" | "gtm-flywheel" | "metodologia" | "contexto" | "solucao" | "epicos" | "roadmap" | "metricas" | "riscos" | "casos-de-uso" | "investimento" | "faqs";
+type Tab = "visao-geral" | "gtm-flywheel" | "metodologia" | "contexto" | "solucao" | "epicos" | "roadmap" | "casos-de-uso" | "investimento" | "faqs";
 
 const AUTH_STORAGE_KEY = "liv_proposta_auth";
 const COVER_VIEWED_KEY = "liv_proposta_cover_viewed";
@@ -109,8 +107,6 @@ export default function Home() {
     { id: "solucao" as Tab, label: "Solução", icon: Lightbulb },
     { id: "epicos" as Tab, label: "Épicos", icon: Rocket },
     { id: "roadmap" as Tab, label: "Roadmap", icon: Calendar },
-    { id: "metricas" as Tab, label: "Métricas", icon: Target },
-    { id: "riscos" as Tab, label: "Riscos", icon: Shield },
     { id: "casos-de-uso" as Tab, label: "Casos de Uso", icon: Sparkles },
     { id: "investimento" as Tab, label: "Investimento", icon: DollarSign },
     { id: "faqs" as Tab, label: "FAQs", icon: HelpCircle },
@@ -182,8 +178,6 @@ export default function Home() {
           {activeTab === "solucao" && <Solucao />}
           {activeTab === "epicos" && <Epicos />}
           {activeTab === "roadmap" && <Roadmap />}
-          {activeTab === "metricas" && <Metricas />}
-          {activeTab === "riscos" && <Riscos />}
           {activeTab === "casos-de-uso" && <CasosDeUso />}
           {activeTab === "investimento" && <Investimento />}
           {activeTab === "faqs" && <FAQs />}

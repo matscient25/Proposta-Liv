@@ -9,7 +9,6 @@ export default function GTMFlywheel() {
       borderColor: "border-blue-400",
       bgColor: "bg-blue-50",
       metrics: ["CONTAS", "MQAs"],
-      icon: "👁️",
       description: "Atrair atenção e gerar awareness"
     },
     {
@@ -18,7 +17,6 @@ export default function GTMFlywheel() {
       borderColor: "border-cyan-400",
       bgColor: "bg-cyan-50",
       metrics: ["SQLs"],
-      icon: "📚",
       description: "Educar prospects sobre soluções"
     },
     {
@@ -27,7 +25,6 @@ export default function GTMFlywheel() {
       borderColor: "border-indigo-400",
       bgColor: "bg-indigo-50",
       metrics: ["SALs"],
-      icon: "🎯",
       description: "Qualificar e selecionar leads"
     },
     {
@@ -36,7 +33,6 @@ export default function GTMFlywheel() {
       borderColor: "border-purple-400",
       bgColor: "bg-purple-50",
       metrics: ["CLIENTES"],
-      icon: "🚀",
       description: "Ativar novos clientes"
     },
     {
@@ -45,7 +41,6 @@ export default function GTMFlywheel() {
       borderColor: "border-pink-400",
       bgColor: "bg-pink-50",
       metrics: ["ATIVOS"],
-      icon: "💰",
       description: "Demonstrar retorno sobre investimento"
     },
     {
@@ -54,7 +49,6 @@ export default function GTMFlywheel() {
       borderColor: "border-orange-400",
       bgColor: "bg-orange-50",
       metrics: ["GRR"],
-      icon: "🔄",
       description: "Manter clientes engajados"
     },
     {
@@ -63,7 +57,6 @@ export default function GTMFlywheel() {
       borderColor: "border-red-400",
       bgColor: "bg-red-50",
       metrics: ["NRR", "LTV"],
-      icon: "📈",
       description: "Expandir relacionamento"
     }
   ];
@@ -123,7 +116,7 @@ export default function GTMFlywheel() {
               {stages.map((stage, index) => (
                 <div key={index} className="flex flex-col items-center">
                   <div className={`w-full h-32 bg-gradient-to-br ${stage.color} rounded-xl shadow-lg p-4 flex flex-col items-center justify-center text-white transform hover:scale-105 transition-transform`}>
-                    <div className="text-3xl mb-2">{stage.icon}</div>
+                    <div className="text-2xl font-bold mb-2">{index + 1}</div>
                     <div className="text-xs font-bold text-center leading-tight">
                       {stage.name}
                     </div>
@@ -148,7 +141,9 @@ export default function GTMFlywheel() {
             {stages.map((stage, index) => (
               <div key={index} className={`p-4 ${stage.bgColor} ${stage.borderColor} border-2 rounded-lg`}>
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="text-xl">{stage.icon}</span>
+                  <div className={`w-6 h-6 rounded bg-gradient-to-br ${stage.color} flex items-center justify-center text-white font-bold text-xs flex-shrink-0`}>
+                    {index + 1}
+                  </div>
                   <h4 className="text-xs font-bold text-slate-900">{stage.name}</h4>
                 </div>
                 <p className="text-xs text-slate-700">{stage.description}</p>
