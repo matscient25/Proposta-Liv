@@ -18,7 +18,6 @@ import FAQs from "@/components/sections/FAQs";
 type Tab = "visao-geral" | "gtm-flywheel" | "metodologia" | "contexto" | "solucao" | "epicos" | "roadmap" | "casos-de-uso" | "investimento" | "faqs";
 
 const AUTH_STORAGE_KEY = "liv_proposta_auth";
-const COVER_VIEWED_KEY = "liv_proposta_cover_viewed";
 
 export default function Home() {
   const [showCover, setShowCover] = useState(true);
@@ -29,12 +28,7 @@ export default function Home() {
 
   // Verificar autenticação persistente ao carregar
   useEffect(() => {
-    // Verificar se a capa já foi visualizada
-    const coverViewed = localStorage.getItem(COVER_VIEWED_KEY);
-    if (coverViewed === "true") {
-      setShowCover(false);
-    }
-
+    // Sempre mostrar a capa primeiro, mas verificar se há sessão válida
     const storedAuth = localStorage.getItem(AUTH_STORAGE_KEY);
     if (storedAuth) {
       try {
@@ -44,7 +38,6 @@ export default function Home() {
         if (Date.now() - timestamp < sevenDays) {
           setUserEmail(email);
           setIsAuthenticated(true);
-          setShowCover(false); // Se já está autenticado, não mostrar capa
         } else {
           // Sessão expirada, limpar
           localStorage.removeItem(AUTH_STORAGE_KEY);
@@ -58,8 +51,10 @@ export default function Home() {
   }, []);
 
   const handleViewProposal = () => {
+    // Ao clicar em "Visualizar Proposta", esconde a capa
+    // Se já estiver autenticado, vai direto para a proposta
+    // Se não estiver autenticado, vai para o login
     setShowCover(false);
-    localStorage.setItem(COVER_VIEWED_KEY, "true");
   };
 
   const handleLogin = (email: string) => {
@@ -75,6 +70,7 @@ export default function Home() {
   const handleLogout = () => {
     setIsAuthenticated(false);
     setUserEmail("");
+    setShowCover(true); // Volta para a capa ao fazer logout
     localStorage.removeItem(AUTH_STORAGE_KEY);
   };
 
