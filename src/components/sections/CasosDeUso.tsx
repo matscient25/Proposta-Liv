@@ -275,7 +275,7 @@ export default function CasosDeUso() {
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-cyan-600">▸</span>
-                <span>NPS < 6 → Alerta CS + Task de follow-up</span>
+                <span>NPS {'<'} 6 → Alerta CS + Task de follow-up</span>
               </li>
               <li className="flex items-start gap-2">
                 <span className="text-cyan-600">▸</span>
