@@ -1,9 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import LandingCover from "@/components/LandingCover";
 import Login from "@/components/Login";
-import { Eye, FileText, Lightbulb, Rocket, Calendar, DollarSign, Target, Shield, Sparkles, HelpCircle } from "lucide-react";
+import { Eye, FileText, Lightbulb, Rocket, Calendar, DollarSign, Target, Shield, Sparkles, HelpCircle, RefreshCcw, GitBranch } from "lucide-react";
 import VisaoGeral from "@/components/sections/VisaoGeral";
+import GTMFlywheel from "@/components/sections/GTMFlywheel";
+import Metodologia from "@/components/sections/Metodologia";
 import Contexto from "@/components/sections/Contexto";
 import Solucao from "@/components/sections/Solucao";
 import Epicos from "@/components/sections/Epicos";
@@ -14,24 +17,94 @@ import CasosDeUso from "@/components/sections/CasosDeUso";
 import Investimento from "@/components/sections/Investimento";
 import FAQs from "@/components/sections/FAQs";
 
-type Tab = "visao-geral" | "contexto" | "solucao" | "epicos" | "roadmap" | "metricas" | "riscos" | "casos-de-uso" | "investimento" | "faqs";
+type Tab = "visao-geral" | "gtm-flywheel" | "metodologia" | "contexto" | "solucao" | "epicos" | "roadmap" | "metricas" | "riscos" | "casos-de-uso" | "investimento" | "faqs";
+
+const AUTH_STORAGE_KEY = "liv_proposta_auth";
+const COVER_VIEWED_KEY = "liv_proposta_cover_viewed";
 
 export default function Home() {
+  const [showCover, setShowCover] = useState(true);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [userEmail, setUserEmail] = useState("");
   const [activeTab, setActiveTab] = useState<Tab>("visao-geral");
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Verificar autenticação persistente ao carregar
+  useEffect(() => {
+    // Verificar se a capa já foi visualizada
+    const coverViewed = localStorage.getItem(COVER_VIEWED_KEY);
+    if (coverViewed === "true") {
+      setShowCover(false);
+    }
+
+    const storedAuth = localStorage.getItem(AUTH_STORAGE_KEY);
+    if (storedAuth) {
+      try {
+        const { email, timestamp } = JSON.parse(storedAuth);
+        // Verificar se a sessão não expirou (7 dias)
+        const sevenDays = 7 * 24 * 60 * 60 * 1000;
+        if (Date.now() - timestamp < sevenDays) {
+          setUserEmail(email);
+          setIsAuthenticated(true);
+          setShowCover(false); // Se já está autenticado, não mostrar capa
+        } else {
+          // Sessão expirada, limpar
+          localStorage.removeItem(AUTH_STORAGE_KEY);
+        }
+      } catch (error) {
+        console.error("Erro ao recuperar autenticação:", error);
+        localStorage.removeItem(AUTH_STORAGE_KEY);
+      }
+    }
+    setIsLoading(false);
+  }, []);
+
+  const handleViewProposal = () => {
+    setShowCover(false);
+    localStorage.setItem(COVER_VIEWED_KEY, "true");
+  };
 
   const handleLogin = (email: string) => {
     setUserEmail(email);
     setIsAuthenticated(true);
+    // Salvar no localStorage com timestamp
+    localStorage.setItem(
+      AUTH_STORAGE_KEY,
+      JSON.stringify({ email, timestamp: Date.now() })
+    );
   };
 
+  const handleLogout = () => {
+    setIsAuthenticated(false);
+    setUserEmail("");
+    localStorage.removeItem(AUTH_STORAGE_KEY);
+  };
+
+  if (isLoading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-50 via-purple-50 to-purple-100">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto mb-4"></div>
+          <p className="text-purple-900 font-medium">Carregando...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Mostrar capa primeiro
+  if (showCover) {
+    return <LandingCover onViewProposal={handleViewProposal} />;
+  }
+
+  // Depois mostrar login
   if (!isAuthenticated) {
     return <Login onLogin={handleLogin} />;
   }
 
   const tabs = [
     { id: "visao-geral" as Tab, label: "Visão Geral", icon: Eye },
+    { id: "gtm-flywheel" as Tab, label: "GTM Flywheel", icon: RefreshCcw },
+    { id: "metodologia" as Tab, label: "Metodologia", icon: GitBranch },
     { id: "contexto" as Tab, label: "Contexto", icon: FileText },
     { id: "solucao" as Tab, label: "Solução", icon: Lightbulb },
     { id: "epicos" as Tab, label: "Épicos", icon: Rocket },
@@ -66,7 +139,13 @@ export default function Home() {
             </div>
             <div className="text-left md:text-right">
               <p className="text-sm text-slate-600">Acesso concedido para:</p>
-              <p className="text-sm font-semibold text-purple-900 truncate max-w-xs">{userEmail}</p>
+              <p className="text-sm font-semibold text-purple-900 truncate max-w-xs mb-2">{userEmail}</p>
+              <button
+                onClick={handleLogout}
+                className="text-xs text-purple-600 hover:text-purple-800 underline transition-colors"
+              >
+                Sair
+              </button>
             </div>
           </div>
 
@@ -97,6 +176,8 @@ export default function Home() {
         {/* Content */}
         <div className="bg-white rounded-2xl shadow-2xl p-6 md:p-8">
           {activeTab === "visao-geral" && <VisaoGeral />}
+          {activeTab === "gtm-flywheel" && <GTMFlywheel />}
+          {activeTab === "metodologia" && <Metodologia />}
           {activeTab === "contexto" && <Contexto />}
           {activeTab === "solucao" && <Solucao />}
           {activeTab === "epicos" && <Epicos />}
