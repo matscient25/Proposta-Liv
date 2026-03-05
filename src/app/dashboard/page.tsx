@@ -3,11 +3,22 @@
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { Users, UserCheck, Award, LogOut } from 'lucide-react';
-import { usuariosData, getLicencaLabel } from '@/lib/usuarios-data';
+import { getLicencaLabel } from '@/lib/usuarios-data';
+
+interface Usuario {
+  id: string;
+  nome: string;
+  sobrenome: string;
+  email: string;
+  tipo_licenca: string;
+  status: string;
+}
 
 export default function DashboardPage() {
   const router = useRouter();
   const [email, setEmail] = useState('');
+  const [usuarios, setUsuarios] = useState<Usuario[]>([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const userEmail = localStorage.getItem('user_email');
@@ -17,15 +28,32 @@ export default function DashboardPage() {
       router.push('/');
     } else {
       setEmail(userEmail || '');
+      carregarDados();
     }
   }, [router]);
 
-  const totalUsuarios = usuariosData.length;
-  const usuariosAtivos = usuariosData.filter(u => u.status === 'ativo').length;
+  const carregarDados = async () => {
+    try {
+      // Inicializar banco
+      await fetch('/api/init');
+
+      // Buscar usuários
+      const res = await fetch('/api/usuarios');
+      const data = await res.json();
+      setUsuarios(data.data || []);
+    } catch (error) {
+      console.error('Erro ao carregar dados:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const totalUsuarios = usuarios.length;
+  const usuariosAtivos = usuarios.filter(u => u.status === 'ativo').length;
 
   // Contar por tipo de licença
   const licencasCount: { [key: string]: number } = {};
-  usuariosData.forEach(u => {
+  usuarios.forEach(u => {
     const tipo = u.tipo_licenca || 'N/A';
     licencasCount[tipo] = (licencasCount[tipo] || 0) + 1;
   });
@@ -146,34 +174,40 @@ export default function DashboardPage() {
         {/* Últimos Usuários */}
         <div className="bg-white rounded-lg shadow p-6">
           <h2 className="text-lg font-semibold text-gray-900 mb-4">Últimos Usuários Adicionados</h2>
-          <div className="overflow-x-auto">
-            <table className="w-full">
-              <thead className="border-b border-gray-200">
-                <tr>
-                  <th className="text-left text-sm font-medium text-gray-700 py-3">Nome</th>
-                  <th className="text-left text-sm font-medium text-gray-700 py-3">Email</th>
-                  <th className="text-left text-sm font-medium text-gray-700 py-3">Tipo de Licença</th>
-                  <th className="text-left text-sm font-medium text-gray-700 py-3">Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {usuariosData.slice(0, 5).map((user) => (
-                  <tr key={user.id} className="border-b border-gray-200 hover:bg-gray-50">
-                    <td className="py-3 text-sm text-gray-900">{user.nome} {user.sobrenome}</td>
-                    <td className="py-3 text-sm text-gray-600">{user.email}</td>
-                    <td className="py-3 text-sm">{getLicencaLabel(user.tipo_licenca)}</td>
-                    <td className="py-3 text-sm">
-                      <span className={`px-2 py-1 rounded text-xs font-medium ${
-                        user.status === 'ativo' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
-                      }`}>
-                        {user.status === 'ativo' ? 'Ativo' : 'Inativo'}
-                      </span>
-                    </td>
+          {loading ? (
+            <div className="text-center py-8">
+              <p className="text-gray-600">Carregando dados...</p>
+            </div>
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead className="border-b border-gray-200">
+                  <tr>
+                    <th className="text-left text-sm font-medium text-gray-700 py-3">Nome</th>
+                    <th className="text-left text-sm font-medium text-gray-700 py-3">Email</th>
+                    <th className="text-left text-sm font-medium text-gray-700 py-3">Tipo de Licença</th>
+                    <th className="text-left text-sm font-medium text-gray-700 py-3">Status</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+                </thead>
+                <tbody>
+                  {usuarios.slice(0, 5).map((user) => (
+                    <tr key={user.id} className="border-b border-gray-200 hover:bg-gray-50">
+                      <td className="py-3 text-sm text-gray-900">{user.nome} {user.sobrenome}</td>
+                      <td className="py-3 text-sm text-gray-600">{user.email}</td>
+                      <td className="py-3 text-sm">{getLicencaLabel(user.tipo_licenca)}</td>
+                      <td className="py-3 text-sm">
+                        <span className={`px-2 py-1 rounded text-xs font-medium ${
+                          user.status === 'ativo' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
+                        }`}>
+                          {user.status === 'ativo' ? 'Ativo' : 'Inativo'}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
         </div>
       </div>
     </div>

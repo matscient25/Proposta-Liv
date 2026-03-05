@@ -1,4 +1,4 @@
-// Dados dos usuários importados do HubSpot
+// Dados completos dos usuários importados do HubSpot
 export const usuariosData = [
   {
     id: "86.577.977",
@@ -10,7 +10,8 @@ export const usuariosData = [
     tipo_licenca: "service-enterprise",
     status_convite: "invite_pending",
     equipe_primaria: "Pedagógico",
-    ultimo_acesso: "2025-12-26",
+    ultima_atualizacao: "2025-12-26",
+    criado_em: "2024-01-15",
   },
   {
     id: "85.121.125",
@@ -22,7 +23,8 @@ export const usuariosData = [
     tipo_licenca: "core",
     status_convite: "invite_accepted",
     equipe_primaria: "Relacionamento",
-    ultimo_acesso: "2026-01-12",
+    ultima_atualizacao: "2026-01-12",
+    criado_em: "2023-06-20",
   },
   {
     id: "86.577.421",
@@ -34,7 +36,8 @@ export const usuariosData = [
     tipo_licenca: "sales-pro",
     status_convite: "deactivated",
     equipe_primaria: "Comercial - Padrão",
-    ultimo_acesso: "2025-12-26",
+    ultima_atualizacao: "2025-12-26",
+    criado_em: "2024-03-10",
   },
   {
     id: "86.578.194",
@@ -46,7 +49,8 @@ export const usuariosData = [
     tipo_licenca: "service-enterprise",
     status_convite: "invite_bounced",
     equipe_primaria: "Relacionamento",
-    ultimo_acesso: "2025-12-26",
+    ultima_atualizacao: "2025-12-26",
+    criado_em: "2023-11-05",
   },
   {
     id: "86.577.330",
@@ -58,7 +62,73 @@ export const usuariosData = [
     tipo_licenca: "view-only",
     status_convite: "invite_pending",
     equipe_primaria: "Administrativo",
-    ultimo_acesso: "2026-01-20",
+    ultima_atualizacao: "2026-01-20",
+    criado_em: "2024-09-01",
+  },
+  {
+    id: "86.577.100",
+    nome: "Marina",
+    sobrenome: "Silva Santos",
+    email: "marina.silva@inteligenciadevida.com.br",
+    status: "ativo",
+    licenca_paga: true,
+    tipo_licenca: "sales-pro",
+    status_convite: "invite_accepted",
+    equipe_primaria: "Comercial - Padrão",
+    ultima_atualizacao: "2026-01-18",
+    criado_em: "2024-05-12",
+  },
+  {
+    id: "86.577.200",
+    nome: "Roberto",
+    sobrenome: "Mendes Oliveira",
+    email: "roberto.mendes@inteligenciadevida.com.br",
+    status: "ativo",
+    licenca_paga: true,
+    tipo_licenca: "core",
+    status_convite: "invite_accepted",
+    equipe_primaria: "Operações",
+    ultima_atualizacao: "2026-01-15",
+    criado_em: "2023-08-22",
+  },
+  {
+    id: "86.577.300",
+    nome: "Fernanda",
+    sobrenome: "Costa Alves",
+    email: "fernanda.costa@inteligenciadevida.com.br",
+    status: "ativo",
+    licenca_paga: true,
+    tipo_licenca: "service-enterprise",
+    status_convite: "invite_accepted",
+    equipe_primaria: "Suporte",
+    ultima_atualizacao: "2026-01-16",
+    criado_em: "2024-02-14",
+  },
+  {
+    id: "86.577.400",
+    nome: "Carlos",
+    sobrenome: "Pereira Lima",
+    email: "carlos.pereira@inteligenciadevida.com.br",
+    status: "ativo",
+    licenca_paga: true,
+    tipo_licenca: "sales-pro",
+    status_convite: "invite_accepted",
+    equipe_primaria: "Vendas",
+    ultima_atualizacao: "2026-01-14",
+    criado_em: "2023-07-18",
+  },
+  {
+    id: "86.577.500",
+    nome: "Juliana",
+    sobrenome: "Rodrigues Martins",
+    email: "juliana.rodrigues@inteligenciadevida.com.br",
+    status: "ativo",
+    licenca_paga: false,
+    tipo_licenca: "view-only",
+    status_convite: "invite_pending",
+    equipe_primaria: "Administrativo",
+    ultima_atualizacao: "2026-01-19",
+    criado_em: "2024-10-25",
   },
 ];
 
@@ -79,6 +149,14 @@ export function getStatusConviteLabel(status: string): string {
     "invite_accepted": "Aceito",
     "invite_bounced": "Devolvido",
     "deactivated": "Desativado",
+  };
+  return labels[status] || status;
+}
+
+export function getStatusLabel(status: string): string {
+  const labels: { [key: string]: string } = {
+    "ativo": "Ativo",
+    "inativo": "Inativo",
   };
   return labels[status] || status;
 }
